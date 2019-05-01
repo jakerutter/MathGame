@@ -16,6 +16,7 @@ Math Game v.2
 	word problems -simple word problems for practicing reading math problems and determining answer.
 	
 ###Coming Soon
+
 	percent problems
 	money math problems
     
@@ -30,5 +31,7 @@ Math Game v.2
 	include negative multiplication and division
 	new game mode with images. (example, which picture shows 50cents)
 	
-###There are some known bugs. These will be corrected as capacity allows.
+###There are some known bugs. 
+
+These will be corrected as capacity allows.
 	
