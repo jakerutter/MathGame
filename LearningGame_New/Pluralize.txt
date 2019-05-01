@@ -1,0 +1,17 @@
+ ''' <summary>
+  ''' Gets a string representing the plurality of some item based on the <paramref name="count">number of items</paramref>.
+  ''' </summary>
+  ''' <param name="count">The count.</param>
+  ''' <param name="pluralString">The string to use when the count refers to multiple items.</param>
+  ''' <param name="notPluralString">The string to use when the count refers to a single item.</param>
+  ''' <returns><paramref name="notPluralString"/> when the <paramref name="count">count</paramref> is equal to <c>1</c>,
+  ''' <paramref name="pluralString" /> otherwise.</returns>
+  Public Function Pluralize(count As Double, pluralString As String, notPluralString As String) As String
+
+    If count = 1 Then
+      Return notPluralString
+    Else
+      Return pluralString
+    End If
+
+  End Function
