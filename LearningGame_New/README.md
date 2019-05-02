@@ -1,9 +1,9 @@
 Math Game v.2
 ========================
 
-##Math Game with new UI. 
+## Math Game with new UI. 
 
-###Game modes include
+### Game modes include
 
     addition -user sets upper and lower bounds on addends.
     subtraction -user sets upper and lower bounds on minuend and subtrahend. no negative answers at this time.
@@ -15,12 +15,12 @@ Math Game v.2
     equations -simple equations for beginning practice determining value of variable.
 	word problems -simple word problems for practicing reading math problems and determining answer.
 	
-###Coming Soon
+### Coming Soon
 
 	percent problems
 	money math problems
     
-###Feature road map
+### Feature road map
 
     improved score tracking visualization
 	log in mechanism
@@ -31,7 +31,7 @@ Math Game v.2
 	include negative multiplication and division
 	new game mode with images. (example, which picture shows 50cents)
 	
-###There are some known bugs. 
+### There are some known bugs. 
 
 These will be corrected as capacity allows.
 	
