@@ -15,6 +15,10 @@ Math Game v.2
     equations -simple equations for beginning practice determining value of variable.
 	word problems -simple word problems for practicing reading math problems and determining answer.
 	
+### Recently added
+
+added bonus questions: for each 10 questions answered correctly in a row the player gets 1 bonus question at the end of the game to help increase their overall score.
+
 ### Coming Soon
 
 	percent problems
