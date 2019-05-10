@@ -423,17 +423,44 @@ function submitAnswer() {
 
 function updateStats(result){
   var stats = getStorage('stats');
-  stats.questionsAnswered +=1;
-
+  
   if(result === 'correct'){
         stats.currentStreak +=1;
         stats.allTimeScore += 1;
         stats.globalCorrect +=1;
+
+         // if not in bonus +1 questions answered
+        if (stats.goalRemaining > 0) {
+          stats.questionsAnswered +=1;
+        }
+
         stats.goalRemaining -=1;
+        stats.goalRemaining = Math.max(0, stats.goalRemaining);
+        
         updateStatDisplay(stats);
-   
+        // add 1 bonus question for each streak of 10 correct reached
+        if(stats.currentStreak > 0 && stats.currentStreak % 10 === 0) {
+          console.log('1 bonus question awarded for streak of 10 correct!');
+          let bonusQuestionCount = Number($('#hdnBonusQuestionCount').text());
+  
+          bonusQuestionCount += 1;
+       
+          $('#hdnBonusQuestionCount').text(bonusQuestionCount);
+        }
         if (stats.goalRemaining === 0) {
-          endGame();
+          //check for bonus questions before ending game
+          let bonusQuestionCount = Number($('#hdnBonusQuestionCount').text());
+         
+          if (bonusQuestionCount > 0) {
+            bonusQuestionCount -= 1;
+            $('#hdnBonusQuestionCount').text(bonusQuestionCount);
+       
+            //provide another question for bonus question
+            showGameDivs();
+          } else {
+            endGame();
+          }
+          
         } else {
           // correct but not end of game
           //provide another question
@@ -442,7 +469,26 @@ function updateStats(result){
   } else {
     //incorect
     stats.currentStreak = 0;
-    updateStatDisplay(stats);
+    //if in bonus questions, -1 bonus question
+    if (stats.goalRemaining === 0) {
+      //check for bonus questions before ending game
+      let bonusQuestionCount = Number($('#hdnBonusQuestionCount').text());
+      console.log(bonusQuestionCount + ' is bonus question amount');
+      if (bonusQuestionCount > 0) {
+        bonusQuestionCount -= 1;
+        $('#hdnBonusQuestionCount').text(bonusQuestionCount);
+        console.log(bonusQuestionCount + ' is new bonus question amount');
+        //update stats
+        updateStatDisplay(stats);
+        //provide another question for bonus question
+        showGameDivs();
+      } else {
+        endGame();
+      }
+    } else {
+      // if goalRemaining > 0 add 1 to questionsAnswered
+      stats.questionsAnswered +=1;
+    }
   }
 
   setStorage('stats', stats);
