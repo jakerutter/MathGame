@@ -6,13 +6,21 @@ Math Game v.2
 ### Game modes include
 
     addition -user sets upper and lower bounds on addends.
+    
     subtraction -user sets upper and lower bounds on minuend and subtrahend. no negative answers at this time.
+    
 	addition & subtraction -a blend of the two. user sets upper and lower bounds.
+	
     multiplication -user sets upper and lower bounds on multiplicand and multiplier.
+    
     division -user sets upper and lower bounds on dividend and divisor. All answers are whole numbers at this time.
+    
 	multiplication & division -a blend of the two. user sets upper and lower bounds.
+	
     times tables -user sets the multiplicand and multiplier upper bound. Problems will range from multiplicand * (0-multiplier selected).
+    
     equations -simple equations for beginning practice determining value of variable.
+    
 	word problems -simple word problems for practicing reading math problems and determining answer.
 	
 ### Recently added
