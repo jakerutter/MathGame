@@ -34,14 +34,17 @@ added bonus questions: for each 10 questions answered correctly in a row the pla
     
 ### Feature road map
 
-    improved score tracking visualization
-	log in mechanism
+	remove transition delay
+	when beginning practice mode it will ask how many problems to complete rather than how many the user will get correct before quitting
+	slow the rate at which the rain in the background falls
+	the rain will turn green when a correct answer is given. it will remain green until an incorrect answer is given, at which time it will turn red
+	implement a completed / results pop up like v1 had
+	by default the ongoing stats / progress display will be hidden. this menu will be expandable
+	add timer to the results / ongoing progress display (for practice mode)
 	backed by database
 	leader boards
-	cut over to bootstrap
 	include negative addition and subtraction
 	include negative multiplication and division
-	new game mode with images. (example, which picture shows 50cents)
 	
 ### There are some known bugs. 
 
