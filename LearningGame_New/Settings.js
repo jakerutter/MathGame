@@ -1,11 +1,10 @@
 //Timer for initial settings displays
-
 var counter = setInterval(timer, 1000);
 var count = 0;
 
 function timer() {
   //every 5 seconds
-  if (count % 5 === 0) {
+  if (count % 10 === 0) {
     console.log(count);
   }
   if (count === 0 ) {
@@ -16,10 +15,10 @@ function timer() {
     $("#welcomeMessage p").addClass("load");
   }
   //welcome message fade out
-  if (count === 3 ) {
+  if (count === 2 ) {
     $("#welcomeMessage p").removeClass("load").addClass("unload");
   }
-  if (count === 5) {
+  if (count === 4) {
     $("#welcomeMessage p").html("");
     $("#btnPractice").removeClass("hidden").addClass("settingsButton load");
     $("#btnQuiz").removeClass("hidden").addClass("settingsButton load");
@@ -65,9 +64,9 @@ function showTimerInput(){
   $('#inputGoalTimer').removeClass('hidden unload').addClass('load');
   $('#submitGoalTimer').removeClass('hidden unload').addClass('load');
 }
-
+ 
 function setGoal(){
-  $('#lblGoalTimer').html('Set your goal:\nhow many problems you\'ll answer correctly');
+  $('#lblGoalTimer').html('How many problems?');
   $('#welcomeMessage').remove();
   $('#divButtons').remove();
   $('#mainDiv').removeClass('unload').addClass('load');
@@ -410,9 +409,13 @@ function submitAnswer() {
   console.log('the correct answer is '+ problemObj.correctAnswer);
   if (Number(submittedAnswer) === problemObj.correctAnswer){
     //the answer was correct --> update stats
+    setup(34,139,34);
+    console.log('34,139,34');
     updateStats('correct');
   } else {
    //incorrect. --> update stats
+   setup(255,0,0);
+   console.log('255,0,0');
    updateStats('incorrect');
    showGameDivs();
   }
