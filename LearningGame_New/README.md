@@ -25,7 +25,13 @@ Math Game v.2
 	
 ### Recently added
 
-added bonus questions: for each 10 questions answered correctly in a row the player gets 1 bonus question at the end of the game to help increase their overall score.
+	background rain changes to green when correct answer provided and red when incorrect.
+	slowed the fall of background rain animation
+	
+
+### Recently removed
+
+	removed bonus questions: user feedback determined this feature as undesirable.
 
 ### Coming Soon
 
@@ -36,8 +42,6 @@ added bonus questions: for each 10 questions answered correctly in a row the pla
 
 	remove transition delay
 	when beginning practice mode it will ask how many problems to complete rather than how many the user will get correct before quitting
-	slow the rate at which the rain in the background falls
-	the rain will turn green when a correct answer is given. it will remain green until an incorrect answer is given, at which time it will turn red
 	implement a completed / results pop up like v1 had
 	by default the ongoing stats / progress display will be hidden. this menu will be expandable
 	add timer to the results / ongoing progress display (for practice mode)
