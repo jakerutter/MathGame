@@ -7,18 +7,7 @@ function timer() {
   if (count % 10 === 0) {
     console.log(count);
   }
-  if (count === 0 ) {
-    $("#mainDiv").append("<div id='welcomeMessage'><p>Welcome</p></div>");
-  }
-  //display welcome message
-  if (count === 1 ) {
-    $("#welcomeMessage p").addClass("load");
-  }
-  //welcome message fade out
-  if (count === 2 ) {
-    $("#welcomeMessage p").removeClass("load").addClass("unload");
-  }
-  if (count === 4) {
+  if (count === 0) {
     $("#welcomeMessage p").html("");
     $("#btnPractice").removeClass("hidden").addClass("settingsButton load");
     $("#btnQuiz").removeClass("hidden").addClass("settingsButton load");
@@ -40,11 +29,11 @@ function gameTypeSelected(selection) {
   $('#mainDiv').addClass('unload');
   if (selection === 'practice') {
     //for practice game type allow the user to set an optional goal
-    setTimeout(setGoal, 2500);
+    setTimeout(setGoal, 500);
     console.log('practice selected');
   } else {
     //for quiz the user will set a time and try to get as many right in the time chosen
-    setTimeout(setQuizTimer, 2500);
+    setTimeout(setQuizTimer, 500);
     console.log('quiz selected.');
   }
 }
@@ -110,7 +99,7 @@ function showFormatDiv(){
   $('#submitGoalTimer').addClass('hidden');
   $('#divProblemFormat').removeClass('hidden');
 
-  setTimeout(showFormatButtons, 1500);
+  setTimeout(showFormatButtons, 1000);
 }
 
 function showFormatButtons(){
@@ -125,11 +114,11 @@ function gameFormatSelected(format){
 
   if (format !== 'timesTables') {
     $('#mainDiv').removeClass('load').addClass('unload');
-    setTimeout(selectProblems, 2500);
+    setTimeout(selectProblems, 1000);
   } else {
     //format is timesTables --> show inputs
     $('#divProblemFormat').addClass('unload');
-    setTimeout(showTimesTablesInputs, 2500);
+    setTimeout(showTimesTablesInputs, 1000);
   }
 }
 
@@ -189,7 +178,7 @@ function problemTypeSelected(type) {
   $('#set4').removeClass('load').addClass('unload');
   $('#divClear').addClass('hidden');
 
-  setTimeout(addHiddenToSetDivs, 2500);
+  setTimeout(addHiddenToSetDivs, 1500);
 }
 
 function addHiddenToSetDivs() {
@@ -304,9 +293,6 @@ function checkTTInputs(){
 function showGameDivs(){
   var settings = getStorage('settings');
   
-  //show stats
-  $('#divStats').removeClass('hidden unload').addClass('load');
-  
   if (settings.format === 'word') {
     //hide unwanted divs & inputs, show the ones we want to see
     $('#questionLeaf').removeClass('large-leaf').addClass('extra-large-leaf');
@@ -342,6 +328,7 @@ function showGameDivs(){
       startQuizTimer();
     }
   }
+  $('#btnShowStats').removeClass('hidden');
 }
 
 function startQuizTimer() {
@@ -392,8 +379,8 @@ function createKeyUps(){
 }
 //verify there is a value in the input before submitting
 function checkAnswerInput() {
-  var answerProvided = $('#inputGoalTimer').val();
-  if (answerProvided != '' &&  Number(answerProvided) > 0){
+  var answerProvided = $('#currentAnswer').val();
+  if (answerProvided != ''){
     $('#equationAnswerDisplay').val('');
     submitAnswer();
 
@@ -410,12 +397,10 @@ function submitAnswer() {
   if (Number(submittedAnswer) === problemObj.correctAnswer){
     //the answer was correct --> update stats
     setup(34,139,34);
-    console.log('34,139,34');
     updateStats('correct');
   } else {
    //incorrect. --> update stats
    setup(255,0,0);
-   console.log('255,0,0');
    updateStats('incorrect');
    showGameDivs();
   }
@@ -424,45 +409,32 @@ function submitAnswer() {
   $('#currentAnswerDisplay').val('');
 }
 
+function toggleDivStats(){
+    //show stats
+  if ($('#divStats').hasClass('load')){
+    $('#divStats').removeClass('load').addClass('unload');
+  }else {
+    $('#divStats').removeClass('hidden unload').addClass('load');
+    //$('#divStats').removeClass('unload').addClass('load');
+  }
+}
+
 function updateStats(result){
   var stats = getStorage('stats');
   
+  stats.goalRemaining -=1;
+  stats.goalRemaining = Math.max(0, stats.goalRemaining);
+
   if(result === 'correct'){
         stats.currentStreak +=1;
         stats.allTimeScore += 1;
         stats.globalCorrect +=1;
-
-         // if not in bonus +1 questions answered
-        if (stats.goalRemaining > 0) {
-          stats.questionsAnswered +=1;
-        }
-
-        stats.goalRemaining -=1;
-        stats.goalRemaining = Math.max(0, stats.goalRemaining);
+        stats.questionsAnswered +=1;
         
         updateStatDisplay(stats);
-        // add 1 bonus question for each streak of 10 correct reached
-        if(stats.currentStreak > 0 && stats.currentStreak % 10 === 0) {
-          console.log('1 bonus question awarded for streak of 10 correct!');
-          let bonusQuestionCount = Number($('#hdnBonusQuestionCount').text());
-  
-          bonusQuestionCount += 1;
        
-          $('#hdnBonusQuestionCount').text(bonusQuestionCount);
-        }
         if (stats.goalRemaining === 0) {
-          //check for bonus questions before ending game
-          let bonusQuestionCount = Number($('#hdnBonusQuestionCount').text());
-         
-          if (bonusQuestionCount > 0) {
-            bonusQuestionCount -= 1;
-            $('#hdnBonusQuestionCount').text(bonusQuestionCount);
-       
-            //provide another question for bonus question
-            showGameDivs();
-          } else {
             endGame();
-          }
           
         } else {
           // correct but not end of game
@@ -470,30 +442,16 @@ function updateStats(result){
           showGameDivs();
         }
   } else {
-    //incorect
+    //incorrect
     stats.currentStreak = 0;
-    //if in bonus questions, -1 bonus question
-    if (stats.goalRemaining === 0) {
-      //check for bonus questions before ending game
-      let bonusQuestionCount = Number($('#hdnBonusQuestionCount').text());
-      console.log(bonusQuestionCount + ' is bonus question amount');
-      if (bonusQuestionCount > 0) {
-        bonusQuestionCount -= 1;
-        $('#hdnBonusQuestionCount').text(bonusQuestionCount);
-        console.log(bonusQuestionCount + ' is new bonus question amount');
-        //update stats
-        updateStatDisplay(stats);
-        //provide another question for bonus question
-        showGameDivs();
-      } else {
-        endGame();
-      }
-    } else {
-      // if goalRemaining > 0 add 1 to questionsAnswered
-      stats.questionsAnswered +=1;
-    }
-  }
+    stats.questionsAnswered += 1;
+    updateStatDisplay(stats);
 
+    if (stats.goalRemaining === 0) {
+        endGame();
+    } 
+  }
+  
   setStorage('stats', stats);
 }
 
@@ -530,7 +488,7 @@ function updateStatDisplay(stats){
  
   if(settings.selection === 'practice') {
     $('#goalRemaining').removeClass('hidden');
-    $('#goalRemaining').html('Questions remaining for goal: '+stats.goalRemaining);
+    $('#goalRemaining').html('Questions remaining: '+stats.goalRemaining);
     }
 }
 

@@ -16,12 +16,9 @@ if (!colorB) {
 }
 
 function setup(colorR, colorG, colorB) {
-  //var raindrop = [];
-  // var H = window.screen.availHeight;
-  // var W = window.screen.availWidth;
-  if (!colorR) colorR = 138;
-  if (!colorB) colorG = 43;
-  if (!colorG) colorB = 226;
+  if (colorR !== 0 && !colorR) colorR = 138;
+  if (colorG !== 0 && !colorG) colorG = 43;
+  if (colorB !== 0 && !colorB) colorB = 226;
 
   createCanvas(W, H);
   for (var i = 0; i < 30; i++) {

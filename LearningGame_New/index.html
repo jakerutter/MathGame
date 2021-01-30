@@ -17,7 +17,7 @@
 <script type="text/javascript" src="libraries/p5.dom.js"></script>
 <script type="text/javascript" src="libraries/jquery-ui.min.js"></script>
 
-<title>Learning Game</title>
+<title>Math Game</title>
 </head>
 <body onload='loadLocalStorageValues();'>
 
@@ -98,7 +98,9 @@
 
     <!-- end of mainDiv -->
   </div>
-    <div id='divStats' class="divStats hidden unload">
+  <div class='divStats'>
+    <div id='divStats' class="hidden unload">
+        <div>
         <span id='statHeader' class='divStatHeader'>Game Stats</span>
         <br><br>
         <span id='allTimeScore' class='statDetails'></span>
@@ -108,11 +110,15 @@
         <span id='percentCorrect' class='statDetails'></span>
         <br><br>
         <span id='goalRemaining' class='statDetails hidden'></span>
-        <span id='timeRemaining' class='statDetails hidden'></span>
-    </div>  
-
-    <div class='hidden' id='hdnVariable'></div>
-    <div class="hidden" id="hdnBonusQuestionCount">0</div>
+        <br><br>
+        <span id='timeRemaining' class='statDetails hidden'></span>    
+        </div> 
+    </div>
+    <button id='btnToggleStats' class='settingsButton gutter-top' onclick='toggleDivStats()'>
+        <span class="btnText">Toggle Stats</span>
+    </button>  
+    </div>
+   <div class='hidden' id='hdnVariable'></div>
 
 </body>
 
